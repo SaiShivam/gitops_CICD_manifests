@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitopsdeploy
+  labels:
+    app: flask-app-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app-container
+        image: saishivam/gitops-argo-app:v1
+        ports:
+        - containerPort: 5000
